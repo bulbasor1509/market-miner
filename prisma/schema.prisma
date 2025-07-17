@@ -1,0 +1,30 @@
+generator client {
+    provider  = "prisma-client-py"
+    interface = "sync"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum Trade {
+    BUY
+    SELL
+}
+
+model Bulkdeals {
+    id              String   @id @default(cuid())
+    date            DateTime @db.Date
+    symbol          String
+    security_name   String
+    client_name     String
+    trade_type      Trade
+    quantity_traded BigInt
+    wt_price        Float
+}
+
+model BulkDates {
+    id   String   @id @default(cuid())
+    date DateTime @db.Date
+}
